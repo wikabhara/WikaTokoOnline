@@ -14,18 +14,12 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
 
   async function handleLogin(e) {
     e.preventDefault();
 
     try {
-      const userLoggedIn = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      setUser(userLoggedIn);
+      await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/");
     } catch (error) {

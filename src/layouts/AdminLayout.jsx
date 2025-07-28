@@ -14,7 +14,7 @@ export default function AdminLayout() {
     } else if (!user) {
       navigate("/auth/login");
     }
-  }, []);
+  }, [user, navigate]);
   // protecting your page
 
   return (

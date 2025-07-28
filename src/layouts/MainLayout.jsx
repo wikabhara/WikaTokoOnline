@@ -15,7 +15,7 @@ export default function MainLayout() {
     if (!user) {
       navigate("/auth/login");
     }
-  }, []);
+  }, [user, navigate]);
   // protecting your page
   console.log(user);
   async function handleLogout() {
