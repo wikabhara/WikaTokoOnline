@@ -1,11 +1,11 @@
 import { Link, Outlet, useNavigate } from "react-router";
-import { auth } from "../configs/firebase";
 import { CgProfile } from "react-icons/cg";
 import LogoWikaToko from "../assets/img/wikaToko.png";
 import Swal from "sweetalert2";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { signOut } from "firebase/auth";
+import { auth } from "../configs/Firebase";
 
 export default function MainLayout() {
   // protecting your page

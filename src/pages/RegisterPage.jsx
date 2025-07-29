@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
 import { FaGoogle } from "react-icons/fa";
-import { auth, googleProvider } from "../configs/Firebase";
+import { auth, db, googleProvider } from "../configs/Firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -20,6 +21,13 @@ export default function RegisterPage() {
         email,
         password
       );
+      await setDoc(doc(db, "users", userRegistered.user.uid), {
+        fistName: "",
+        lastName: "",
+        photo: "",
+        role: "user",
+        email: userRegistered.user.email,
+      });
 
       navigate("/");
     } catch (error) {
