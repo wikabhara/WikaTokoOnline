@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../configs/Firebase";
+import { auth, db } from "../configs/Firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export const AuthContext = createContext({
   user: null,
@@ -10,17 +11,25 @@ export const AuthContext = createContext({
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoadPage, setLoadPage] = useState(true); //load page trick//
-  const value = { user, setUser };
+  const [userRole, setUserRole] = useState(null);
+  const value = { user, setUser, setUserRole, userRole };
 
   useEffect(() => {
     setLoadPage(true);
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setUserRole(userDocSnap.data().role);
+        } else {
+          setUserRole(null);
+        }
       } else {
         setUser(null);
+        setUserRole(null);
       }
-
       setLoadPage(false); //load page trick//
     });
 

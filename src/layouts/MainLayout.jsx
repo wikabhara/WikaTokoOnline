@@ -10,14 +10,14 @@ import { auth } from "../configs/Firebase";
 export default function MainLayout() {
   // protecting your page
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, userRole } = useContext(AuthContext);
   useEffect(() => {
     if (!user) {
       navigate("/auth/login");
     }
   }, [user, navigate]);
   // protecting your page
-  console.log(user);
+  console.log(userRole);
   async function handleLogout() {
     console.log(user);
     try {
@@ -75,11 +75,13 @@ export default function MainLayout() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link to="myproduct/add" className="justify-between">
-                  My Product
-                </Link>
-              </li>
+              {userRole === "admin" && (
+                <li>
+                  <Link to="myproduct/add" className="justify-between">
+                    My Product
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="/favourite" className="justify-between">
                   Favourite

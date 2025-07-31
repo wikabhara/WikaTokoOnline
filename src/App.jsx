@@ -8,9 +8,10 @@ import HomePage from "./pages/HomePage";
 // import ContactUsPage from "./pages/ContactUsPage";
 // import AboutPage from "./pages/AboutPage";
 import AuthContextProvider from "./contexts/AuthContext";
+import MyProduct from "./pages/MyProduct";
 // import ProfilePage from "./pages/ProfilePage";
 // import FavouritePage from "./pages/FavouritePage";
-// import MyProductPage from "./pages/MyProductPage";
+
 // import EditProductPage from "./pages/EditProduct";
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "myproduct/add",
+        element: <MyProduct />,
       },
     ],
   },
