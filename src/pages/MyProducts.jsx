@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { FaBars, FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { db } from "../configs/Firebase";
@@ -9,17 +9,50 @@ export default function MyProducts() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
+  async function getProducts() {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    const result = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setProducts(result);
+  }
+
+  async function deleteProduct(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteDoc(doc(db, "products", id));
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your product has been deleted.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          getProducts(); // Refresh the product list
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong while deleting the product.",
+          });
+        }
+      }
+    });
+  }
+
   useEffect(() => {
-    async function getProducts() {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      const result = querySnapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-      setProducts(result);
-    }
     getProducts();
   }, []);
   return (
@@ -58,7 +91,10 @@ export default function MyProducts() {
                     <button className="btn btn-ghost btn-xs">
                       <FaEdit />
                     </button>
-                    <button className="btn btn-ghost btn-xs text-error">
+                    <button
+                      onClick={() => deleteProduct(p.id)}
+                      className="btn btn-ghost btn-xs text-error"
+                    >
                       <FaTrash />
                     </button>
                   </div>
