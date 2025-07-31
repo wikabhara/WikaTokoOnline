@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { db } from "../configs/Firebase";
 import { useNavigate } from "react-router";
 
-export default function MyProduct() {
+export default function MyProducts() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ export default function MyProduct() {
     <>
       <main>
         <h1> Product List</h1>
+
         <table className="table table-zebra w-full">
           <thead>
             <tr>
@@ -37,6 +38,7 @@ export default function MyProduct() {
               <th>Action</th>
             </tr>
 
+            {/* product list di-looping  */}
             {products?.map((p, index) => (
               <tr key={p.id} className="hover">
                 <th>{index + 1}</th>
@@ -65,6 +67,16 @@ export default function MyProduct() {
             ))}
           </thead>
         </table>
+        <div>
+          <div className="flex justify-center">
+            <button
+              onClick={() => navigate("products/add")}
+              className="btn btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
+            >
+              Add Product
+            </button>
+          </div>
+        </div>
       </main>
     </>
   );

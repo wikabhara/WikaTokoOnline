@@ -8,7 +8,9 @@ import HomePage from "./pages/HomePage";
 // import ContactUsPage from "./pages/ContactUsPage";
 // import AboutPage from "./pages/AboutPage";
 import AuthContextProvider from "./contexts/AuthContext";
-import MyProduct from "./pages/MyProduct";
+
+import MyProducts from "./pages/MyProducts";
+import AddProductPage from "./pages/AddProductPage";
 // import ProfilePage from "./pages/ProfilePage";
 // import FavouritePage from "./pages/FavouritePage";
 
@@ -24,8 +26,12 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "myproduct/add",
-        element: <MyProduct />,
+        path: "myproducts",
+        element: <MyProducts />,
+      },
+      {
+        path: "myproducts/products/add",
+        element: <AddProductPage />,
       },
     ],
   },

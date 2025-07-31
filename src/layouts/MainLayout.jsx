@@ -77,7 +77,7 @@ export default function MainLayout() {
               </li>
               {userRole === "admin" && (
                 <li>
-                  <Link to="myproduct/add" className="justify-between">
+                  <Link to="myproducts" className="justify-between">
                     My Product
                   </Link>
                 </li>
