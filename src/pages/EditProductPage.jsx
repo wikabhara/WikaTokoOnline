@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
