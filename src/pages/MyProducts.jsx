@@ -88,7 +88,10 @@ export default function MyProducts() {
                 <th>{p.stock}</th>
                 <th>
                   <div className="flex gap-2">
-                    <button className="btn btn-ghost btn-xs">
+                    <button
+                      onClick={() => navigate(`products/edit/${p.id}`)}
+                      className="btn btn-ghost btn-xs"
+                    >
                       <FaEdit />
                     </button>
                     <button

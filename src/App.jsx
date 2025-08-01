@@ -11,10 +11,9 @@ import AuthContextProvider from "./contexts/AuthContext";
 
 import MyProducts from "./pages/MyProducts";
 import AddProductPage from "./pages/AddProductPage";
+import EditProductPage from "./pages/EditProductPage";
 // import ProfilePage from "./pages/ProfilePage";
 // import FavouritePage from "./pages/FavouritePage";
-
-// import EditProductPage from "./pages/EditProduct";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "myproducts/products/add",
         element: <AddProductPage />,
+      },
+      {
+        path: "myproducts/products/edit/:id",
+        element: <EditProductPage />,
       },
     ],
   },
