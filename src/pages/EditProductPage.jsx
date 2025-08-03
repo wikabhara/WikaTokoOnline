@@ -54,10 +54,10 @@ export default function EditProductPage() {
           setPrice(docSnap.data().price);
           setStock(docSnap.data().stock);
         } else {
-          console.log("Product tidak ditemukan");
+          Swal.fire("Produk Tidak Ditemukan");
         }
       } catch (error) {
-        console.log(error);
+        Swal.fire("Gagal", "Terjadi kesalahan saat memperbarui produk.", error);
       }
     }
     getProductById(id);

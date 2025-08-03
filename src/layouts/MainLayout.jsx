@@ -17,7 +17,7 @@ export default function MainLayout() {
     }
   }, [user, navigate]);
   // protecting your page
-  console.log(userRole);
+
   async function handleLogout() {
     console.log(user);
     try {

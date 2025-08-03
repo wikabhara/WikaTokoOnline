@@ -5,15 +5,14 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
-// import ContactUsPage from "./pages/ContactUsPage";
-// import AboutPage from "./pages/AboutPage";
+import ContactUsPage from "./pages/ContactUsPage";
 import AuthContextProvider from "./contexts/AuthContext";
-
 import MyProducts from "./pages/MyProducts";
 import AddProductPage from "./pages/AddProductPage";
 import EditProductPage from "./pages/EditProductPage";
-// import ProfilePage from "./pages/ProfilePage";
-// import FavouritePage from "./pages/FavouritePage";
+import AboutUsPage from "./pages/AboutUsPage";
+import ProfilePage from "./pages/ProfilePage";
+import FavouritePage from "./pages/FavouritePage";
 
 const router = createBrowserRouter([
   {
@@ -25,12 +24,28 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "about",
+        element: <AboutUsPage />,
+      },
+      {
+        path: "contactus",
+        element: <ContactUsPage />,
+      },
+      {
         path: "myproducts",
         element: <MyProducts />,
       },
       {
         path: "myproducts/add",
         element: <AddProductPage />,
+      },
+      {
+        path: "favourite",
+        element: <FavouritePage />,
       },
       {
         path: "myproducts/edit/:id",
