@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { FaShoppingCart } from "react-icons/fa";
+import { useParams } from "react-router";
 
 export default function ProductDetailPage() {
-  const { id } = useParams(); // Mengambil ID dari URL
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -65,12 +65,7 @@ export default function ProductDetailPage() {
             </p>
             <div className="badge badge-secondary">Stok: {product.stock}</div>
 
-            <p className="py-6">
-              {/* product description */}
-              Deskripsi produk akan ditampilkan di sini. Ini adalah tempat untuk
-              detail lengkap mengenai spesifikasi, bahan, dan keunggulan produk
-              Anda.
-            </p>
+            <p className="py-6">{product.description}</p>
 
             <div className="card-actions justify-end">
               <button className="btn btn-primary btn-lg">

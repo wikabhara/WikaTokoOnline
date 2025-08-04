@@ -38,6 +38,7 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold">Welcome to WikaToko</h1>
+
           <p className="py-4 text-lg">
             Temukan produk kecantikan terbaik pilihan Anda di sini.
           </p>
@@ -62,15 +63,19 @@ export default function HomePage() {
                       className="h-48 w-full object-contain rounded-xl"
                     />
                   </figure>
+
                   <div className="card-body items-center text-center">
                     <h2 className="card-title">{p.name}</h2>
+
                     <p className="text-lg font-semibold text-primary">
                       Rp {Number(p.price).toLocaleString("id-ID")}
                     </p>
+
                     <div className="card-actions justify-end w-full mt-3">
                       <button className="btn btn-outline btn-sm btn-secondary">
                         <FaHeart />
                       </button>
+
                       <button className="btn btn-primary flex-grow">
                         <FaShoppingCart className="mr-2" />
                         Add to Cart

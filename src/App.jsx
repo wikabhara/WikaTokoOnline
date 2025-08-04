@@ -13,6 +13,7 @@ import EditProductPage from "./pages/EditProductPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import ProfilePage from "./pages/ProfilePage";
 import FavouritePage from "./pages/FavouritePage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "myproducts/edit/:id",
         element: <EditProductPage />,
+      },
+      {
+        path: "product/:id",
+        element: <ProductDetailPage />,
       },
     ],
   },
