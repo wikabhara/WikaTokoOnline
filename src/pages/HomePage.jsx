@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   async function getProducts() {
     setIsLoading(true);
@@ -53,8 +55,9 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((p) => (
                 <div
+                  onClick={() => navigate(`product/${p.id}`)}
                   key={p.id}
-                  className="card bg-base-100 transition-transform hover:scale-105"
+                  className="card bg-base-100 transition-transform hover:scale-105 cursor-pointer"
                 >
                   <figure className="px-6 pt-6">
                     <img

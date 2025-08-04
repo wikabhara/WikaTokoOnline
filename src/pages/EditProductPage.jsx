@@ -9,6 +9,7 @@ export default function EditProductPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -21,6 +22,7 @@ export default function EditProductPage() {
         imageUrl: imageUrl,
         price: price,
         stock: stock,
+        description: description,
       });
       console.log("successfully edit product with id:", id);
       Swal.fire({
@@ -53,6 +55,7 @@ export default function EditProductPage() {
           setImageUrl(docSnap.data().imageUrl);
           setPrice(docSnap.data().price);
           setStock(docSnap.data().stock);
+          setDescription(docSnap.data().description || "");
         } else {
           Swal.fire("Produk Tidak Ditemukan");
         }
@@ -126,6 +129,19 @@ export default function EditProductPage() {
               onChange={(e) => setStock(Number(e.target.value))}
               required
               min="0"
+            />
+          </div>
+
+          <div className="form-control mt-4 flex flex-col">
+            <label className="label">
+              <span className="label-text">Product Description</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
+              placeholder="Jelaskan detail produk Anda di sini..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
             />
           </div>
 

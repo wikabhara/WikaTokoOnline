@@ -9,6 +9,7 @@ export default function AddProductPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
   async function submitProduct(e) {
@@ -19,6 +20,7 @@ export default function AddProductPage() {
         imageUrl: imageUrl,
         price: price,
         stock: stock,
+        description: description,
       });
       console.log(docRef);
       navigate("/myproducts");
@@ -102,6 +104,19 @@ export default function AddProductPage() {
               onChange={(e) => setStock(Number(e.target.value))}
               required
               min="0"
+            />
+          </div>
+
+          <div className="form-control mt-4 flex flex-col">
+            <label className="label">
+              <span className="label-text">Product Description</span>
+            </label>
+            <input
+              className="input input-bordered w-full"
+              placeholder="Jelaskan detail produk Anda di sini..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
             />
           </div>
 
