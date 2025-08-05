@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../configs/Firebase";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 export default function HomePage() {
@@ -55,11 +55,13 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((p) => (
                 <div
-                  onClick={() => navigate(`product/${p.id}`)}
                   key={p.id}
-                  className="card bg-base-100 transition-transform hover:scale-105 cursor-pointer"
+                  className="card bg-base-100 transition-transform hover:scale-105"
                 >
-                  <figure className="px-6 pt-6">
+                  <figure
+                    onClick={() => navigate(`product/${p.id}`)}
+                    className="px-6 pt-6 cursor-pointer"
+                  >
                     <img
                       src={p.imageUrl}
                       alt={p.name}
@@ -74,16 +76,10 @@ export default function HomePage() {
                       Rp {Number(p.price).toLocaleString("id-ID")}
                     </p>
 
-                    <div className="card-actions justify-end w-full mt-3">
-                      <button className="btn btn-outline btn-sm btn-secondary">
-                        <FaHeart />
-                      </button>
-
-                      <button className="btn btn-primary flex-grow">
-                        <FaShoppingCart className="mr-2" />
-                        Add to Cart
-                      </button>
-                    </div>
+                    <button className="btn btn-primary flex-grow">
+                      <FaShoppingCart className="mr-2" />
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               ))}

@@ -83,8 +83,8 @@ export default function MainLayout() {
                 </li>
               )}
               <li>
-                <Link to="/favourite" className="justify-between">
-                  Favourite
+                <Link to="/cart" className="justify-between">
+                  Cart
                 </Link>
               </li>
               <li>

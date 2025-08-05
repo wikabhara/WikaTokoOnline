@@ -3,6 +3,7 @@ import { db } from "../configs/Firebase";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import UploadWidget from "../components/UploadWidget.jsx";
 
 export default function AddProductPage() {
   const [name, setName] = useState("");
@@ -71,9 +72,9 @@ export default function AddProductPage() {
                 className="input input-bordered w-full"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                //   disabled={true}
+                disabled={true}
               />
-              {/* <UploadWidget setImageUrl={setImageUrl} /> */}
+              <UploadWidget setImageUrl={setImageUrl} />
             </div>
           </div>
 

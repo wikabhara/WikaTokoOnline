@@ -3,6 +3,7 @@ import { db } from "../configs/Firebase";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
+import UploadWidget from "../components/UploadWidget.jsx";
 
 export default function EditProductPage() {
   const [name, setName] = useState("");
@@ -44,12 +45,12 @@ export default function EditProductPage() {
   }
 
   useEffect(() => {
-    console.log(id);
+    // console.log(id);
     async function getProductById(idProduct) {
       try {
         const docRef = doc(db, "products", idProduct);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap.data());
+        // console.log(docSnap.data());
         if (docSnap.exists()) {
           setName(docSnap.data().name);
           setImageUrl(docSnap.data().imageUrl);
@@ -96,9 +97,9 @@ export default function EditProductPage() {
                 className="input input-bordered w-full"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                //   disabled={true}
+                disabled={true}
               />
-              {/* <UploadWidget setImageUrl={setImageUrl} /> */}
+              <UploadWidget setImageUrl={setImageUrl} />
             </div>
           </div>
 
