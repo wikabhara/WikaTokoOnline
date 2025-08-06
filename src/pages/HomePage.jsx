@@ -4,11 +4,19 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/features/CartSlice";
+import Swal from "sweetalert2";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   async function getProducts() {
     setIsLoading(true);
@@ -76,7 +84,10 @@ export default function HomePage() {
                       Rp {Number(p.price).toLocaleString("id-ID")}
                     </p>
 
-                    <button className="btn btn-primary flex-grow">
+                    <button
+                      onClick={() => handleAddToCart(p)}
+                      className="btn btn-primary flex-grow"
+                    >
                       <FaShoppingCart className="mr-2" />
                       Add to Cart
                     </button>

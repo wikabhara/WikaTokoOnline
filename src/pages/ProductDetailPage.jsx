@@ -3,11 +3,18 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { FaShoppingCart } from "react-icons/fa";
 import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/CartSlice";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   useEffect(() => {
     async function getProductById() {
@@ -68,7 +75,10 @@ export default function ProductDetailPage() {
             <p className="py-6">{product.description}</p>
 
             <div className="card-actions justify-end">
-              <button className="btn btn-primary btn-lg">
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="btn btn-primary btn-lg"
+              >
                 <FaShoppingCart className="mr-2" />
                 Add to Cart
               </button>
