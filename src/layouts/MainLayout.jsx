@@ -2,21 +2,20 @@ import { Link, Outlet, useNavigate } from "react-router";
 import { CgProfile } from "react-icons/cg";
 import LogoWikaToko from "../assets/img/wikaToko.png";
 import Swal from "sweetalert2";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../configs/Firebase";
 
 export default function MainLayout() {
-  // protecting your page
   const navigate = useNavigate();
   const { user, userRole } = useContext(AuthContext);
+
   useEffect(() => {
     if (!user) {
       navigate("/auth/login");
     }
   }, [user, navigate]);
-  // protecting your page
 
   async function handleLogout() {
     console.log(user);
@@ -46,11 +45,6 @@ export default function MainLayout() {
           </Link>
         </div>
         <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
-          />
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -100,6 +94,7 @@ export default function MainLayout() {
         </div>
       </div>
       {/* navbar */}
+
       <Outlet />
     </>
   );
