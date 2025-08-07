@@ -11,6 +11,7 @@ export default function AddProductPage() {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
   async function submitProduct(e) {
@@ -106,6 +107,27 @@ export default function AddProductPage() {
               required
               min="0"
             />
+          </div>
+
+          <div className="form-control mt-4">
+            <label className="label grid flex-col">
+              <span className="label-text">Category</span>
+            </label>
+            <select
+              className="select select-bordered w-full"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
+              <option disabled value="">
+                Pilih Kategori
+              </option>
+              <option>Skincare</option>
+              <option>Makeup</option>
+              <option>Haircare</option>
+              <option>Bodycare</option>
+              <option>Fragrance</option>
+            </select>
           </div>
 
           <div className="form-control mt-4 flex flex-col">

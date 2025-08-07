@@ -12,7 +12,7 @@ const UploadWidget = ({ setImageUrl }) => {
         uploadPreset: "WikaTokoOnline",
       },
       function (error, result) {
-        console.log(result);
+        // console.log(result);
         if (!error && result && result.event === "success") {
           console.log("Upload successful:", result.info.secure_url);
           setImageUrl(result.info.secure_url);

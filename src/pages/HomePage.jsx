@@ -78,6 +78,11 @@ export default function HomePage() {
                   </figure>
 
                   <div className="card-body items-center text-center">
+                    {p.category && (
+                      <div className="badge badge-outline mb-2">
+                        {p.category}
+                      </div>
+                    )}
                     <h2 className="card-title">{p.name}</h2>
 
                     <p className="text-lg font-semibold text-primary">

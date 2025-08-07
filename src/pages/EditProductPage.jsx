@@ -11,6 +11,7 @@ export default function EditProductPage() {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -24,6 +25,7 @@ export default function EditProductPage() {
         price: price,
         stock: stock,
         description: description,
+        category: category,
       });
       console.log("successfully edit product with id:", id);
       Swal.fire({
@@ -57,6 +59,7 @@ export default function EditProductPage() {
           setPrice(docSnap.data().price);
           setStock(docSnap.data().stock);
           setDescription(docSnap.data().description || "");
+          setCategory(docSnap.data().category || "");
         } else {
           Swal.fire("Produk Tidak Ditemukan");
         }
@@ -131,6 +134,27 @@ export default function EditProductPage() {
               required
               min="0"
             />
+          </div>
+
+          <div className="form-control mt-4">
+            <label className="label grid flex-col">
+              <span className="label-text">Category</span>
+            </label>
+            <select
+              className="select select-bordered w-full"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
+              <option disabled value="">
+                Pilih Kategori
+              </option>
+              <option>Skincare</option>
+              <option>Makeup</option>
+              <option>Haircare</option>
+              <option>Bodycare</option>
+              <option>Fragrance</option>
+            </select>
           </div>
 
           <div className="form-control mt-4 flex flex-col">

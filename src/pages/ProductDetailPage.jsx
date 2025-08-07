@@ -66,6 +66,9 @@ export default function ProductDetailPage() {
             />
           </figure>
           <div className="card-body lg:w-1/2">
+            {product.category && (
+              <div className="badge badge-accent mb-2">{product.category}</div>
+            )}
             <h1 className="card-title text-4xl font-bold">{product.name}</h1>
             <p className="text-3xl text-primary my-4">
               Rp {Number(product.price).toLocaleString("id-ID")}
