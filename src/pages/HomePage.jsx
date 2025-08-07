@@ -1,18 +1,21 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/CartSlice";
 import Swal from "sweetalert2";
+import Cards from "../components/Cards";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [filterCategory, setFilterCategory] = useState("All");
+  const [sortBy, setSortBy] = useState("default");
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -21,7 +24,18 @@ export default function HomePage() {
   async function getProducts() {
     setIsLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "products"));
+      let productsQuery = collection(db, "products");
+      const queryConstraints = [];
+      if (filterCategory !== "All") {
+        queryConstraints.push(where("category", "==", filterCategory));
+      }
+      if (sortBy === "price-asc") {
+        queryConstraints.push(orderBy("price", "asc"));
+      } else if (sortBy === "price-desc") {
+        queryConstraints.push(orderBy("price", "desc"));
+      }
+      const q = query(productsQuery, ...queryConstraints);
+      const querySnapshot = await getDocs(q);
       const result = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -41,7 +55,7 @@ export default function HomePage() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [filterCategory, sortBy]);
 
   return (
     <div className="bg-base-200 min-h-screen p-4 md:p-8">
@@ -54,6 +68,44 @@ export default function HomePage() {
           </p>
         </div>
 
+        <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
+          {/* filter by category */}
+          <div className="form-control w-full md:w-xs">
+            <label className="label">
+              <span className="label-text">Filter by Category</span>
+            </label>
+            <select
+              className="select select-bordered"
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="Skincare">Skincare</option>
+              <option value="Makeup">Makeup</option>
+              <option value="Haircare">Haircare</option>
+              <option value="Bodycare">Bodycare</option>
+              <option value="Fragrance">Fragrance</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          {/* sort by price */}
+          <div className="form-control w-full md:w-xs">
+            <label className="label">
+              <span className="label-text">Sort by Price</span>
+            </label>
+            <select
+              className="select select-bordered"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="default">Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
         <main>
           {isLoading ? (
             <div className="text-center py-16">
@@ -62,42 +114,12 @@ export default function HomePage() {
           ) : products.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {products.map((p) => (
-                <div
+                <Cards
                   key={p.id}
-                  className="card bg-base-100 transition-transform hover:scale-105"
-                >
-                  <figure
-                    onClick={() => navigate(`product/${p.id}`)}
-                    className="px-6 pt-6 cursor-pointer"
-                  >
-                    <img
-                      src={p.imageUrl}
-                      alt={p.name}
-                      className="h-48 w-full object-contain rounded-xl"
-                    />
-                  </figure>
-
-                  <div className="card-body items-center text-center">
-                    {p.category && (
-                      <div className="badge badge-outline mb-2">
-                        {p.category}
-                      </div>
-                    )}
-                    <h2 className="card-title">{p.name}</h2>
-
-                    <p className="text-lg font-semibold text-primary">
-                      Rp {Number(p.price).toLocaleString("id-ID")}
-                    </p>
-
-                    <button
-                      onClick={() => handleAddToCart(p)}
-                      className="btn btn-primary flex-grow"
-                    >
-                      <FaShoppingCart className="mr-2" />
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
+                  p={p}
+                  onClickAddCart={() => handleAddToCart(p)}
+                  onClickNavigate={() => navigate(`product/${p.id}`)}
+                />
               ))}
             </div>
           ) : (

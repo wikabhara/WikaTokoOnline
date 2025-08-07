@@ -154,6 +154,7 @@ export default function EditProductPage() {
               <option>Haircare</option>
               <option>Bodycare</option>
               <option>Fragrance</option>
+              <option>Others</option>
             </select>
           </div>
 

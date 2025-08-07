@@ -23,8 +23,9 @@ export default function AddProductPage() {
         price: price,
         stock: stock,
         description: description,
+        category: category,
       });
-      console.log(docRef);
+      // console.log(docRef);
       navigate("/myproducts");
       Swal.fire({
         icon: "success",
@@ -127,6 +128,7 @@ export default function AddProductPage() {
               <option>Haircare</option>
               <option>Bodycare</option>
               <option>Fragrance</option>
+              <option>Others</option>
             </select>
           </div>
 
