@@ -1,14 +1,6 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-  startAfter,
-} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../configs/Firebase";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -25,7 +17,6 @@ export default function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // State untuk Filter, Sort, dan Search
   const [filterCategory, setFilterCategory] = useState("All");
   const [sortBy, setSortBy] = useState("default");
   const [searchQuery, setSearchQuery] = useState("");
