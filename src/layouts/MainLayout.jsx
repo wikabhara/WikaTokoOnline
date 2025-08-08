@@ -36,7 +36,6 @@ export default function MainLayout() {
 
   return (
     <>
-      {/* navbar */}
       <div className="navbar bg-base-100 shadow-sm">
         <img src={LogoWikaToko} alt="WikaToko Logo" className="h-16" />
         <div className="flex-1">
@@ -93,7 +92,6 @@ export default function MainLayout() {
           </div>
         </div>
       </div>
-      {/* navbar */}
 
       <Outlet />
     </>

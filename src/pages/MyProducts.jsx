@@ -148,7 +148,6 @@ export default function MyProducts() {
         </div>
       </div>
 
-      {/* Sidebar */}
       <div className="drawer-side">
         <label
           htmlFor="my-drawer-2"

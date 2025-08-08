@@ -25,7 +25,7 @@ export default function AddProductPage() {
         description: description,
         category: category,
       });
-      // console.log(docRef);
+
       navigate("/myproducts");
       Swal.fire({
         icon: "success",
